@@ -1,0 +1,108 @@
+C:\Users\Your Name>python --version
+python --version 
+comando: "python" ou "python3" para abrir o interpretador de python
+ou simplesmente "python nomearq.py"
+
+
+
+não precisa declarar anteriormente as variáveis, e nem seu tipo
+não ha problema com espaços entre '=' por exemplo
+a identação DEVE acontecer, em hierarquia
+python também é uma linguagem interpretada como shell, mas o shell roda pelo proprio terminal
+já o python precisa ser usado ao invés do comando "bash" ou precisa ser aberto com comando
+voce pode identar com tab ou espaço, mas o método deve ser definido no começo e permanecer 		assim em todo o bloco de codigo em questão
+
+
+https://www.w3schools.com/python/default.asp
+
+
+
+#esse é um comentário, funcionam normalmente
+
+
+--------------------------------------> terminal
+
+./erick.py não é possível pois é pra bash
+python ou python3 erick.py
+python.exe erick.py #não sei usar..
+também é possivel interpretar arquivos com a extensão diferente
+
+usando os comandos 'import sys' e 'print(sys.executable)' ou 'import os' , 'python_executable_path = os.environ['_']' e 'print(os.environ['_'])' veremos qual o caminho do interpretador
+pegamos esse caminho menos o python, exemplo se caminho = /usr/bin/python teremos que escrever #!/usr/bin/env python
+isso se chama shebang, e usando isso ajuda o sistema a saber qual interpretador usar
+
+
+--------------------------------------> variáveis
+
+
+uma variável é criada assim que você atribui valor a ela, não quando a declara.
+dependendo do valor que você atribui a uma variável, ela terá um tipo, que você pode ver
+com o comando type(variavel) (que pode ser impresso com um print). esse tipo é variavel, 
+você pode fazer o casting a qualquer momento, e até alterar o valor durante.
+x = 10, veriamos que x é int, mas se fizermos x = str(x), x será uma string
+uma string pode ser declarada com aspas simples ou duplas
+as variáveis são case-sensitives, pode haver uma letra 'A' e uma 'a'
+os nomes das variaveis funcionam igual a C
+você pode ceclarar mais de uma variavel na mesma linha, na equerda os nomes e direita valores
+para varias variaveis com o mesmo valor, separe-as com '=' inves da virgula
+você pode desempacotar uma SEQUENCIA em varias variaveis, como uma divisão de doces
+criar uma variavel fora de uma função fará dela global, mas uma variavel global tambem pode ser
+	criada usando o comando 'global', ate dentro de funções. ele tambem altera seu valor 
+x = 35e3 significa a potencia de 10. complexos não podem ser convertidos com casting
+'import random' e depois 'print(random.randrange(1, 10))' imprime um aleatorio de 1 ate 9
+strings de multiplas linhas devem usar 3 aspas duplas ou simples
+as strings também são vetores, pode-se acessar os caracteres individualmente como em C
+len() retorna o tamanho de uma string
+voce pode fatiar strings, usando por exemplo se string="ola gente", fazer string[3:5] nos daria "a g".é permitido deixar em branco um dos dois intervalos
+	se usar valor negativo, sendo 0 o primeiro indice, -1 representa o ultimo (dá a volta)
+string.upper() retorna a string em maiusculo, e lower minusculo. strip remove espaços em branco no inici ou fim. Replace("x","y") substitui x por y numa string
+string.slipt("caractere separador") separa uma string em duas substrings
+usando + você pode concatenar variaveis (do tipo string) strings e caracteres
+concatenar string e inteiro é possivel: txt.format(valor) substituirá os {} na string pelo número. {3} significa receber 3 variavel passada por parametro
+usando / é possivel colocar caracteres ilegais em strings, como em C
+
+https://www.w3schools.com/python/python_strings_methods.asp
+
+
+
+--------------------------------------> especiais
+
+
+
+
+
+-------------------------------------->print
+
+print é o comando para escrever na tela
+print("assim voce escreve algo para printar") ou tambem com aspas simples
+print(variavel) , independende do que existe em variavel, é transformado em string
+print("oi","ola") assim se imprime mais de uma coisa, pode ser quantas quiser ate variaveis
+print("oi","nao","oxe",sep="!!!") sep é o separador, veremos: oi!!!nao!!!oxe
+o separador padrão é um espaço
+o end assim como o sep é o que imprime no final. O padrão é \n
+você também pode usar '+' invés da virgula para printar varias variaveis string
+se usar o '+' para numeros, eles serão somados. Apenas a virgula suporta variaveis diferentes
+o print tambem mostra o resultado de condições, imprimindo true ou false
+
+
+
+--------------------------------------> condições
+
+in string
+
+
+
+
+--------------------------------------> loops
+
+
+
+o if pode ou não ter parentesis na condição, e precisa de 2 pontos no final
+o else também precisa de 2 pontos
+o mesmo se aplica para o while, e ele não usa chaves, e sim a identação
+
+
+
+
+
+for x in "banana": vai percorrer cada letra da string atribuindo o valor a x
