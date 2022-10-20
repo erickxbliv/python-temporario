@@ -73,7 +73,7 @@ o print tambem mostra o valor de condições ou bools
 
 
 
---------------------------------------> especiais
+--------------------------------------> especiais: lógica e condições, modularização
 + adição, - subtração, * multiplicação, / divisão float, // divisão int, ** exponencial e % resto da divisão
 todos podem atribuir valor a uma variavel usando =, exemplo: x ?= y
 os operadores lógicos são ==, !=, >, <, <=, >=
@@ -99,7 +99,7 @@ para uma lista, é possivel declará-la usando a função list(), a unica difere
 
 
 
--------------------------------------->print
+--------------------------------------> print
 
 print é o comando para escrever na tela
 print("assim voce escreve algo para printar") ou tambem com aspas simples
@@ -114,9 +114,13 @@ o print tambem mostra o resultado de condições, imprimindo true ou false
 
 
 
---------------------------------------> condições
+--------------------------------------> classes e objetos
 
-in string
+
+
+
+--------------------------------------> funções
+
 
 
 
