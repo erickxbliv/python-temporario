@@ -65,7 +65,35 @@ https://www.w3schools.com/python/python_strings_methods.asp
 
 
 
+--------------------------------------> bools
+variaveis tambem pode ter valor de verdadeiro ou falso, sendo o falso o valor 0, o tipo de dado None ou listas vazias
+é um tipo de dado que depende de condições ou simplismente ser declarado com algum valor
+o print tambem mostra o valor de condições ou bools
+
+
+
+
 --------------------------------------> especiais
++ adição, - subtração, * multiplicação, / divisão float, // divisão int, ** exponencial e % resto da divisão
+todos podem atribuir valor a uma variavel usando =, exemplo: x ?= y
+os operadores lógicos são ==, !=, >, <, <=, >=
+também existem os operadores and, or e not
+existe o operador para comparar objetos, que é is ou is not
+e o para verificar itens em listas, que é in ou not in
+existem tambem operadores para binario
+
+
+
+
+
+
+
+--------------------------------------> coleções de dados
+
+em python, vetores se chamam lista. Listas funcionam exatamente como C, mas para ser declarados usam = ["x,"y"]
+listas podem ser de qualquer tipo de dado e até misturá-los
+len() é a função que diz o tamanho do vetor. type() indica qual aquele tipo de coleção de dados
+para uma lista, é possivel declará-la usando a função list(), a unica diferença agora é que não precisa dos colchetes
 
 
 
