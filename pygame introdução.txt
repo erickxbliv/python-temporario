@@ -59,10 +59,13 @@ pygame.display.flip()
 fotorect = foto.get_rect()
 
 #criar um rect, mas não sei o que é ainda. Mencionada em *. Não é necessario enviar coordenadas qnd usa o rect. Ele tem como padrão as coordenadas (0,0)
+#rect é um objeto que armaezena coordenadas, basicamente um retangulo. pra desenhar na tela sem um rect, é necessario as coordenadas, largura e altura
+#é possivel criar um objeto a partir de uma imagem carregada,, o rect faz isso tudo automaticamente. É mais facil de mexer, por causa das funções
+#sem o rect, o retangulo a ser desenhado não seria um "dado" e precisaria ser até mesmo alterado e acessado manualmente, bem mais confuso..
 
 fundo = pygame.Surface(tamanho)
 canto_superior_esquerdo_janela = 0, 0
-quatro_pontas = CSE, CSD, CIE, CID = a, b, c, d
+quatro_pontas = LESTE, SUL, LARGURA, ALTURA = a, b, c, d
 
 pygame.draw.rect(fundo,preto,quatro_pontas)
 pygame.draw.rect(fundo,branco,quatro_pontas)
