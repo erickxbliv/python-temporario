@@ -1,0 +1,78 @@
+import pygame
+pygame.init()
+
+#importando a biblioteca pygame e inicializando seus modulos --------------------------------
+
+tamanho = largura, altura = x , y
+janela = pygame.display.set_mode(tamanho)
+
+#isso cria uma janelinha do python nos tamanhos especificados, x e y --------------------------------
+
+for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+
+#isso é importante pra saber se o programa foi fechado (pelo Xzinho) --------------------------------
+
+preto = 0, 0, 0
+branco = 255, 255, 255
+janela.fill(preto)
+
+#é importante definir a cor preta e usar o comando fill durante antes e ou depois de desenhar na tela, pois seria como um comando 'clear', importante pra animação ---
+
+foto = pygame.image.load("arquivo.imag")
+coordenadas = (w, z)
+
+#a função responsável por importar arquivos do computador. E alguma coordenada aleatória --------------------------
+
+janela.blit(imagem, coordenadas)
+pygame.display.flip()
+
+#invés de coordenadas, podia ta sendo enviado um rect *. A função blit basicamente imprime na tela uma copia de qualquer fonte. E o flip atualiza a tela ----------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fotorect = foto.get_rect()
+
+#criar um rect, mas não sei o que é ainda. Mencionada em *. Não é necessario enviar coordenadas qnd usa o rect. Ele tem como padrão as coordenadas (0,0)
+
+fundo = pygame.Surface(tamanho)
+canto_superior_esquerdo_janela = 0, 0
+quatro_pontas = CSE, CSD, CIE, CID = a, b, c, d
+
+pygame.draw.rect(fundo,preto,quatro_pontas)
+pygame.draw.rect(fundo,branco,quatro_pontas)
+
+screen.blit(fundo,canto_superior_esquerdo_janela)
+
+#essas funções juntas literalmente desenham um quadrado branco e um preto nas localidades descritas em cada ponta deles ----------------------------
+
+rect = pygame.Rect(25, 25, 100, 50)
+sub = screen.subsurface(rect)
+pygame.image.save(sub, "screenshot.jpg")
+
+#usando o draw.rect e a função de salvar um print, vai ser possível perceber onde ficaria cada sala na grid
