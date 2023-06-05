@@ -76,30 +76,81 @@
     }
 
     function generateSuggestions(inputs) {
-      // Lógica de geração de sugestões com os critérios adicionados
       const validInputs = inputs.filter(input => input.trim() !== '');
       if (validInputs.length === 0) {
         return ['Entradas inválidas'];
       }
 
-      // Lógica para gerar as sugestões de jogadas
+      // Obter sugestões de jogadas com base nos critérios
       const validMoves = ['a1', 'a2', 'a3', 'a4', 'a5', 'b1', 'b2', 'b3', 'b4', 'b5', 'c1', 'c2', 'c3', 'c4', 'c5', 'd1', 'd2', 'd3', 'd4', 'd5', 'e1', 'e2', 'e3', 'e4', 'e5'];
-      const filteredMoves = validMoves.filter(move => !validInputs.includes(move));
-      const randomIndices = getRandomIndices(filteredMoves.length, 3);
-      const suggestions = randomIndices.map(index => filteredMoves[index]);
 
-      return suggestions;
-    }
+      // Utilização do histórico de armadilhas
+      const previousRound = history[history.length - 1];
+      const previousArmadilhas = previousRound ? previousRound.result : [];
 
-    function getRandomIndices(max, count) {
-      const indices = [];
-      while (indices.length < count) {
-        const randomIndex = Math.floor(Math.random() * max);
-        if (!indices.includes(randomIndex)) {
-          indices.push(randomIndex);
+      // Frequência comum das armadilhas
+      const frequencyCounts = {};
+      for (const armadilha of previousArmadilhas) {
+        frequencyCounts[armadilha] = frequencyCounts[armadilha] + 1 || 1;
+      }
+      const mostFrequent = Object.keys(frequencyCounts).reduce((a, b) => frequencyCounts[a] > frequencyCounts[b] ? a : b);
+
+      // Sequências comuns de armadilhas
+      const sequenceCounts = {};
+      for (let i = 0; i < previousArmadilhas.length - 1; i++) {
+        const sequence = previousArmadilhas.slice(i, i + 2).join('');
+        sequenceCounts[sequence] = sequenceCounts[sequence] + 1 || 1;
+      }
+      const mostCommonSequence = Object.keys(sequenceCounts).reduce((a, b) => sequenceCounts[a] > sequenceCounts[b] ? a : b);
+
+      // Armadilhas em proximidade
+      const proximityCounts = {};
+      for (const armadilha of previousArmadilhas) {
+        const row = armadilha.charCodeAt(0) - 97;
+        const column = parseInt(armadilha.charAt(1)) - 1;
+        for (let i = row - 1; i <= row + 1; i++) {
+          for (let j = column - 1; j <= column + 1; j++) {
+            if (i >= 0 && i < 5 && j >= 0 && j < 5 && !(i === row && j === column)) {
+              const proximityArmadilha = String.fromCharCode(i + 97) + (j + 1);
+              proximityCounts[proximityArmadilha] = proximityCounts[proximityArmadilha] + 1 || 1;
+            }
+          }
         }
       }
-      return indices;
+      const mostProximity = Object.keys(proximityCounts).reduce((a, b) => proximityCounts[a] > proximityCounts[b] ? a : b);
+
+      // Probabilidades das armadilhas
+      const probabilities = {};
+      for (const move of validMoves) {
+        let probability = 1;
+        // Utilização do histórico
+        for (const round of history) {
+          if (round.result.includes(move)) {
+            probability *= 0.5; // Probabilidade fixa para movimentos presentes no histórico
+          } else {
+            probability *= 0.9; // Probabilidade fixa para movimentos ausentes no histórico
+          }
+        }
+        // Frequência comum das armadilhas
+        if (frequencyCounts[move] > 0) {
+          probability *= 1.1; // Aumenta a probabilidade se a armadilha foi frequente na rodada anterior
+        }
+        // Sequências comuns de armadilhas
+        if (mostCommonSequence.includes(move)) {
+          probability *= 1.2; // Aumenta a probabilidade se a armadilha faz parte de uma sequência comum
+        }
+        // Armadilhas em proximidade
+        if (proximityCounts[move] > 0) {
+          probability *= 1.3; // Aumenta a probabilidade se a armadilha está em proximidade com outras armadilhas
+        }
+        probabilities[move] = probability;
+      }
+
+      // Ordenar as sugestões com base nas probabilidades
+      const sortedMoves = validMoves.sort((a, b) => probabilities[b] - probabilities[a]);
+      const suggestions = sortedMoves.slice(0, 3); // Retorna as 3 melhores sugestões
+
+      return suggestions;
     }
 
     function updateHistoryTable() {
