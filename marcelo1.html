@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jogo de Armadilhas</title>
+  <style>
+    /* Estilos... */
+
+    body {
+      background-color: #0d2b3e;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Resto do código... */
+  </style>
+</head>
+<body>
+  <h1>Jogo de Armadilhas</h1>
+  <p>Informe onde estavam as armadilhas na rodada passada:</p>
+  <form id="gameForm">
+    <div class="input-box">
+      <input type="text" placeholder="Caixa 1" id="armadilhasInput1" />
+    </div>
+    <div class="input-box">
+      <input type="text" placeholder="Caixa 2" id="armadilhasInput2" />
+    </div>
+    <div class="input-box">
+      <input type="text" placeholder="Caixa 3" id="armadilhasInput3" />
+    </div>
+    <div class="input-box">
+      <input type="text" placeholder="Caixa 4" id="armadilhasInput4" />
+    </div>
+  </form>
+  <button type="button" onclick="playGame()">Encontrar Oportunidade</button>
+  <h2 id="suggestion"></h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rodada</th>
+        <th>Resultado</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody id="historyBody"></tbody>
+  </table>
+
+  <script>
+    let history = [];
+
+    function playGame() {
+      const armadilhasInputs = [
+        document.getElementById('armadilhasInput1').value,
+        document.getElementById('armadilhasInput2').value,
+        document.getElementById('armadilhasInput3').value,
+        document.getElementById('armadilhasInput4').value
+      ];
+
+      // Gerar sugestões
+      const suggestions = generateSuggestions(armadilhasInputs);
+      document.getElementById('suggestion').textContent = suggestions.join(', ');
+
+      // Salvar resultado da rodada atual no histórico
+      const currentRound = {
+        round: history.length + 1,
+        result: suggestions,
+        date: new Date().toLocaleString()
+      };
+      history.push(currentRound);
+
+      // Atualizar tabela de histórico
+      updateHistoryTable();
+
+      // Limpar input boxes
+      clearInputBoxes();
+    }
+
+    function generateSuggestions(inputs) {
+      // Lógica de geração de sugestões com os critérios adicionados
+      const validInputs = inputs.filter(input => input.trim() !== '');
+      if (validInputs.length === 0) {
+        return ['Entradas inválidas'];
+      }
+
+      // Lógica para gerar as sugestões de jogadas
+      const validMoves = ['a1', 'a2', 'a3', 'a4', 'a5', 'b1', 'b2', 'b3', 'b4', 'b5', 'c1', 'c2', 'c3', 'c4', 'c5', 'd1', 'd2', 'd3', 'd4', 'd5', 'e1', 'e2', 'e3', 'e4', 'e5'];
+      const filteredMoves = validMoves.filter(move => !validInputs.includes(move));
+      const randomIndices = getRandomIndices(filteredMoves.length, 3);
+      const suggestions = randomIndices.map(index => filteredMoves[index]);
+
+      return suggestions;
+    }
+
+    function getRandomIndices(max, count) {
+      const indices = [];
+      while (indices.length < count) {
+        const randomIndex = Math.floor(Math.random() * max);
+        if (!indices.includes(randomIndex)) {
+          indices.push(randomIndex);
+        }
+      }
+      return indices;
+    }
+
+    function updateHistoryTable() {
+      const historyBody = document.getElementById('historyBody');
+      historyBody.innerHTML = '';
+
+      for (let i = 0; i < history.length; i++) {
+        const round = history[i];
+        const row = `
+          <tr>
+            <td>${round.round}</td>
+            <td>${round.result.join(', ')}</td>
+            <td>${round.date}</td>
+          </tr>
+        `;
+        historyBody.insertAdjacentHTML('beforeend', row);
+      }
+    }
+
+    function clearInputBoxes() {
+      const inputs = document.querySelectorAll('input[type="text"]');
+      inputs.forEach(input => {
+        input.value = '';
+      });
+    }
+  </script>
+</body>
+</html>
